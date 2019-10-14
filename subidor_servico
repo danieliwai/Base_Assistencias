@@ -1,0 +1,35 @@
+TRUNCATE TABLE base_gi.temp_ac_servico;
+LOAD DATA INFILE '../../www/txt/assist_ogi/servico_auto_teste.txt' INTO TABLE base_gi.temp_ac_servico
+CHARACTER SET Latin1
+FIELDS TERMINATED BY '\t' ENCLOSED BY '\"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+REPLACE INTO base_gi.ac_servico
+	SELECT   
+                `temp_ac_servico`.`NUM_ASSISTENCIA`
+                ,STR_TO_DATE(`temp_ac_servico`.`DATA_DE_CRIACAO_SOLICITACAO`,'%d/%m/%Y %H:%i:%s') AS DATA_DE_CRIACAO_SOLICITACAO   
+                ,`temp_ac_servico`.`NUM_SOLICITACAO`   
+                ,`temp_ac_servico`.`COD_SERVICO`   
+                ,`temp_ac_servico`.`DESC_SERVICO`
+                ,`temp_ac_servico`.`COD_ESPECIALIDADE`    
+                ,`temp_ac_servico`.`DESC_ESPECIALIDADE` 
+                ,`temp_ac_servico`.`ESTADO_SOLICITACAO` 
+                ,`temp_ac_servico`.`CIDADE_SOLICITACAO` 
+                ,`temp_ac_servico`.`ENDERECO_SOLICITACAO` 
+                ,`temp_ac_servico`.`BAIRRO_SOLICITACAO`    
+                ,`temp_ac_servico`.`CEP_DA_SOLICITACAO` 
+                ,`temp_ac_servico`.`AGENDADO`     
+                ,`temp_ac_servico`.`COD_PRESTADOR`     
+                ,`temp_ac_servico`.`NOME_PRESTADOR`     
+                ,`temp_ac_servico`.`STATUS_SOLICITACAO`     
+                ,`temp_ac_servico`.`TIPO_CARRO_RESERVA`     
+                ,`temp_ac_servico`.`DIARIAS`     
+                ,`temp_ac_servico`.`PROBLEMA`    
+                ,`temp_ac_servico`.`COD_OFICINA_DESTINO`     
+                ,STR_TO_DATE(`temp_ac_servico`.`DATA_DE_CRIACAO_OP`,'%d/%m/%Y %H:%i:%s') AS DATA_DE_CRIACAO_OP      
+                ,`temp_ac_servico`.`NUMERO_DA_OP`     
+                ,`temp_ac_servico`.`STATUS`     
+                ,`temp_ac_servico`.`CUSTO_COMBINADO_OP`   
+ 
+ FROM `base_gi`.`temp_ac_servico`;
