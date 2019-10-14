@@ -1,0 +1,44 @@
+TRUNCATE TABLE base_gi.temp_ac_assistencia;
+LOAD DATA INFILE '../../www/txt/assist_ogi/assist_auto_teste.txt' INTO TABLE base_gi.temp_ac_assistencia
+CHARACTER SET Latin1
+FIELDS TERMINATED BY '\t' ENCLOSED BY '\"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+REPLACE INTO base_gi.ac_assistencias
+
+	SELECT   
+                `temp_ac_assistencia`.`TIPO_ATENDIMENTO`
+                ,`temp_ac_assistencia`.`CLIENTE_INSTITUCIONAL`     
+                ,`temp_ac_assistencia`.`COD_PRODUTO`   
+                ,`temp_ac_assistencia`.`DESC_PRODUTO`   
+                ,`temp_ac_assistencia`.`NUM_ASSISTENCIA`
+                ,STR_TO_DATE(`temp_ac_assistencia`.`DATA_DE_CRIACAO`,'%d/%m/%Y %H:%i:%s') AS DATA_DE_CRIACAO
+                ,`temp_ac_assistencia`.`ABSENT`    
+                ,`temp_ac_assistencia`.`COD_CAUSA` 
+                ,`temp_ac_assistencia`.`DESC_CAUSA` 
+                ,`temp_ac_assistencia`.`COD_PANE` 
+                ,`temp_ac_assistencia`.`DESC_PANE` 
+                ,`temp_ac_assistencia`.`COD_STATUS`    
+                ,`temp_ac_assistencia`.`APOLICE` 
+                ,`temp_ac_assistencia`.`NOME_CLIENTE`     
+                ,`temp_ac_assistencia`.`UF`     
+                ,`temp_ac_assistencia`.`CIDADE`     
+                ,`temp_ac_assistencia`.`DOCUMENTO_CLIENTE`     
+                ,`temp_ac_assistencia`.`PAIS`     
+                ,`temp_ac_assistencia`.`UF_ASSISTENCIA`     
+                ,`temp_ac_assistencia`.`CIDADE_ASSISTENCIA`    
+                ,`temp_ac_assistencia`.`MARCA`     
+                ,`temp_ac_assistencia`.`MODELO`     
+                ,`temp_ac_assistencia`.`CHASSI`     
+                ,`temp_ac_assistencia`.`PLACA`     
+                ,`temp_ac_assistencia`.`ANO_VEICULO`   
+                ,`temp_ac_assistencia`.`CONTRATO_PLANO`                  
+                ,`temp_ac_assistencia`.`SGC_PLANO`     
+                ,STR_TO_DATE(`temp_ac_assistencia`.`INICIO_VIGENCIA`, '%d/%m/%Y') AS INICIO_VIGENCIA  
+                ,STR_TO_DATE(`temp_ac_assistencia`.`FIM_VIGENCIA`, '%d/%m/%Y') AS FIM_VIGENCIA   
+                ,`temp_ac_assistencia`.`EMISSION_ORIGIN`    
+                ,`temp_ac_assistencia`.`POLIZA_AZ`    
+                ,`temp_ac_assistencia`.`APLICA_AZ`
+ 
+	FROM `base_gi`.`temp_ac_assistencia`;
