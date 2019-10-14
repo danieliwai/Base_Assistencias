@@ -32,4 +32,4 @@ CREATE TABLE `base_gi`.`temp_ac_assistencia` (
 ,`EMISSION_ORIGIN` VARCHAR(100) COLLATE latin1_general_ci DEFAULT NULL
 ,`POLIZA_AZ` VARCHAR(100) COLLATE latin1_general_ci DEFAULT NULL
 ,`APLICA_AZ` VARCHAR(100) COLLATE latin1_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci
