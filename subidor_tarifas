@@ -1,0 +1,23 @@
+TRUNCATE TABLE base_gi.temp_ac_tarifa;
+LOAD DATA INFILE '../../www/txt/assist_ogi/tarifas_auto_teste.txt' INTO TABLE base_gi.temp_ac_tarifa
+CHARACTER SET Latin1
+FIELDS TERMINATED BY '\t' ENCLOSED BY '\"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+REPLACE INTO base_gi.ac_tarifa
+	SELECT   
+                `temp_ac_tarifa`.`NUM_ASSISTENCIA`
+                ,`temp_ac_tarifa`.`NUM_SOLICITACAO`
+                ,`temp_ac_tarifa`.`NUMERO_DA_OP` 
+                ,`temp_ac_tarifa`.`ID_DO_ITEM`
+                ,`temp_ac_tarifa`.`TIPO_DE_TARIFA` 
+                ,STR_TO_DATE(`temp_ac_tarifa`.`DATA_DE_CRIACAO_TARIFA`,'%d/%m/%Y %H:%i:%s') AS DATA_DE_CRIACAO_TARIFA
+                ,`temp_ac_tarifa`.`STATUS` 
+                ,`temp_ac_tarifa`.`QUANTIDADE`
+                ,`temp_ac_tarifa`.`VALOR_UNITARIO`
+                ,`temp_ac_tarifa`.`VALOR_PAGO` 
+
+
+ FROM `base_gi`.`temp_ac_tarifa`;
+
